@@ -1,0 +1,14 @@
+[Unit]
+Description=Remote tunnel service
+After=network.target
+
+[Service]
+# Type=oneshot
+ExecStart=/hub-admin-home/scripts/setup-tunnel.sh
+User=root
+RestartSec=15
+Restart=always
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target

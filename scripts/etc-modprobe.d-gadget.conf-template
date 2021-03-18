@@ -1,0 +1,1 @@
+options g_mass_storage file=/home/debian/hub-admin-home/scripts/loop.fs cdrom=0 ro=0 stall=0 removable=1 nofua=1

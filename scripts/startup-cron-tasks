@@ -1,0 +1,8 @@
+@reboot root /hub-admin-home/scripts/init-file-watcher.sh &
+
+
+
+
+
+
+

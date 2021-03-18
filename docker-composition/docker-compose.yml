@@ -1,0 +1,44 @@
+version: '3.4'
+services:
+
+  mynodered:
+    image: swiftconnect/rpi-wifi-setup-helper:1.0.0
+    container_name: 'mynodered'
+    privileged: true
+    environment:
+      - mqttGlobalSettingsTopic=${accountName}/global/settings
+      # TODO USE THIS ONE - mqttCmdReqTopic=$$EDC/${project}/${nodeName}/CMD-V1/#
+      - mqttCmdReqTopic=$$EDC/${accountName}/${nodeName}/CMD-V1/#    
+      - mqttLWTTopic=$$EDC/${accountName}/${nodeName}/MQTT/CRASH
+      - NODE_OPTIONS=--max-old-space-size=100
+
+    # UNCOMMENT FOLLOWING LINE TO ENABLE REMOTE DEBUG
+    # entrypoint: ["npm", "run", "debug", "--", "--userDir", "/data"]
+
+
+
+    restart: "unless-stopped"
+   # $ports:
+    #  - "1880:1880"
+     # - "1883:1883"
+    volumes:
+      - ./zigbee2mqtt/container-data/log:/zigbee2mqtt_log_folder
+      - ../certs:/certs
+      - ./node-red/cfg:/cfg
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+      - /run/udev:/run/udev
+ 
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+    # extra_hosts:
+    #  - "hostip:192.168.1.101"
+    network_mode: host
+    logging:
+       driver: "json-file"
+       options:
+          max-size: "201k"
+          max-file: "10"
+
