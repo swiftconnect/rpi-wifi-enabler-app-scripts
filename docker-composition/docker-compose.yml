@@ -2,7 +2,7 @@ version: '3.4'
 services:
 
   mynodered:
-    image: swiftconnect/rpi-wifi-setup-helper:1.0.4
+    image: docker.swiftsense.biz/swiftsense/rpi-wifi-setup-helper:1.0.5
     container_name: 'mynodered'
     privileged: true
     environment:
