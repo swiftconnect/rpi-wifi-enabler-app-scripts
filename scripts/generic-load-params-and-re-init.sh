@@ -23,13 +23,6 @@ if [ -f $FILE ]; then
     -d '{"totalSteps": 6, "lastExecutedStepDetails": {"index": 2, "name": "Wifi Setup", "error": "", "description": "Executed wifi setup steps..."}}' \
     http://localhost:1880/api/v1/init-process/status
 
-   # STEP3
-   /hub-admin-home/scripts/generic-set-hostname.sh $accountName $nodeName
-   logger SwiftSense  "Done changing hostname..."
-   curl -X POST -H "Content-Type: application/json" \
-    -d '{"totalSteps": 6, "lastExecutedStepDetails": {"index": 3, "name": "Hostname Change", "error": "", "description": "Hostname changed..."}}' \
-    http://localhost:1880/api/v1/init-process/status
-
 else
    logger SwiftSense File $FILE does not exist. Nothing to do...
 fi
